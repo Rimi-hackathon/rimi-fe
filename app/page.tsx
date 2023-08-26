@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
   return (
     <Container>
-      <Image src={Logo} alt="3D Logo" width={200} />
+      <Image src={Logo} alt="3D Logo" width={200} priority />
       <Title>Remi로 AI와 함께 5분만에 퍼스널 브랜딩을 시작해보세요.</Title>
       <Paragraph>
         3분만에 좋은 커리어를 쌓는 방법에 대해 배우고, 당신만의

@@ -69,7 +69,7 @@ const Job = () => {
         </Card>
       </div>
 
-      <Paragraph className="underline" center>
+      <Paragraph className="cursor-not-allowed underline" center>
         아직 방향을 정하지 못했어요
       </Paragraph>
       <Button

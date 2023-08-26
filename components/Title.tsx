@@ -11,7 +11,7 @@ const Title = ({ children, center, text }: TitleProps) => {
     <h2
       className={cn(
         center && "text-center",
-        "break-keep text-2xl font-semibold tracking-wide text-white",
+        "break-keep text-2xl font-semibold leading-relaxed tracking-wide text-white",
       )}
     >
       {text?.map((item, index) => <p key={index}>{item}</p>)}

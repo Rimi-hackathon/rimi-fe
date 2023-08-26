@@ -32,7 +32,7 @@ export default function RootLayout({
           content="Rimi로 AI와 함께 5분만에 퍼스널 브랜딩을 시작해보세요."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Rimi</title>
+        <title>Rimi-AI 퍼스널 브랜딩</title>
       </head>
       <body
         ref={bodyRef}

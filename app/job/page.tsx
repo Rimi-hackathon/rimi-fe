@@ -20,16 +20,16 @@ const Job = () => {
       </Paragraph>
       <div className="my-5 grid aspect-square w-full grid-cols-2 grid-rows-2 gap-5">
         <Card title="디자인">
-          <Image src={DesignImg} alt="디자인" width={120} priority />
+          <Image src={DesignImg} alt="디자인" width={110} priority />
         </Card>
         <Card title="개발">
-          <Image src={DevImg} alt="개발" width={120} priority />
+          <Image src={DevImg} alt="개발" width={110} priority />
         </Card>
         <Card title="기획">
-          <Image src={ProjectImg} alt="기획" width={120} priority />
+          <Image src={ProjectImg} alt="기획" width={110} priority />
         </Card>
         <Card title="목록에 없어요">
-          <Image src={NoneImg} alt="목록에 없어요" width={120} priority />
+          <Image src={NoneImg} alt="목록에 없어요" width={110} priority />
         </Card>
       </div>
       <Paragraph className="underline">아직 방향을 정하지 못했어요</Paragraph>

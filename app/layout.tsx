@@ -7,7 +7,6 @@ import { RecoilRoot } from "recoil";
 import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { disableBodyScroll } from "body-scroll-lock";
 
 const noto = Noto_Sans({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
@@ -23,10 +22,6 @@ export default function RootLayout({
 
   useEffect(() => {
     if (!session) router.push("/");
-    disableBodyScroll(bodyRef.current, {
-      //@ts-ignore
-      allowTouchMove: (el) => el.tagName !== "BODY",
-    });
   }, [session]);
   return (
     <html lang="ko">

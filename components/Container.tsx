@@ -6,11 +6,11 @@ interface ContainerProps {
   lg?: boolean;
 }
 
-const Container = ({ children, center, lg }: ContainerProps) => {
+const Container = ({ children, center }: ContainerProps) => {
   return (
     <main
       className={cn(
-        "flex min-h-full w-full flex-col items-center justify-center gap-5",
+        "flex min-h-full w-full flex-col justify-center gap-5",
         center && "items-center",
       )}
     >

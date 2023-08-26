@@ -17,25 +17,25 @@ const Job = () => {
   const router = useRouter();
   return (
     <Container center>
-      <Image src={Logo} alt="3D Logo" width={60} priority />
+      <Image src={Logo} alt="3D Logo" width={60} />
       <Title center>훗 날 어떤 일을 하고 싶으신가요?</Title>
       <Paragraph center>
         아직 명확하게 방향을 정하지 않았거나, 경험이 없어도 괜찮아요.
       </Paragraph>
       <div className="flex w-full gap-5">
         <Card title="디자인">
-          <Image src={DesignImg} alt="디자인" width={110} priority />
+          <Image src={DesignImg} alt="디자인" width={110} />
         </Card>
         <Card title="개발">
-          <Image src={DevImg} alt="개발" width={110} priority />
+          <Image src={DevImg} alt="개발" width={110} />
         </Card>
       </div>
       <div className="flex w-full gap-5">
         <Card title="기획">
-          <Image src={ProjectImg} alt="기획" width={110} priority />
+          <Image src={ProjectImg} alt="기획" width={110} />
         </Card>
         <Card title="목록에 없어요">
-          <Image src={NoneImg} alt="목록에 없어요" width={110} priority />
+          <Image src={NoneImg} alt="목록에 없어요" width={110} />
         </Card>
       </div>
 

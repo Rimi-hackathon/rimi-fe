@@ -8,9 +8,10 @@ import Title from "@/components/Title";
 import Logo from "@/public/logo.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { main } from "@/lib/recoil";
+import axios from "axios";
 
 const Detail = ({
   params,
@@ -299,10 +300,21 @@ const Detail = ({
 
           <Button
             onClick={() => {
-              router.push(
-                //@ts-ignore
-                content.next,
-              );
+              axios
+                .post("https://f3e2-183-96-52-165.ngrok-free.app/api/next", {
+                  question: content.title,
+                  answer: text,
+                  advice: advice.slice(0, 300),
+                  email: state.email,
+                  step: Number(params.step),
+                  percent: Number(params.index),
+                })
+                .then(() =>
+                  router.push(
+                    //@ts-ignore
+                    content.next,
+                  ),
+                );
             }}
             disabled={text.length < 30}
           >
@@ -323,20 +335,6 @@ const Detail = ({
               value={state.name}
               onChange={(e) =>
                 setState((prev) => ({ ...prev, name: e.target.value }))
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-3 text-white">
-            <label className="text-xl">
-              <span className="text-red-500">*</span> 이메일 주소
-            </label>
-            <input
-              type="text"
-              className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
-              placeholder="rimi@email.com"
-              value={state.email}
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, email: e.target.value }))
               }
             />
           </div>
@@ -366,7 +364,21 @@ const Detail = ({
           </div>
           <Button
             onClick={() => {
-              router.push("/result");
+              if (state.name) {
+                axios
+                  .post(
+                    "https://f3e2-183-96-52-165.ngrok-free.app/api/createNotionPage",
+                    {
+                      name: state.name,
+                      snsUrl: state.sns,
+                      personalSiteUrl: state.site,
+                      email: state.email,
+                    },
+                  )
+                  .then(() => {
+                    router.push("/result");
+                  });
+              } else alert("이름을 입력해주세요.");
             }}
           >
             다 했어요!

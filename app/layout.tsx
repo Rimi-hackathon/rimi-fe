@@ -5,6 +5,7 @@ import { Noto_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { RecoilRoot } from "recoil";
 import { SessionProvider } from "next-auth/react";
+import Redirect from "@/components/Redirect";
 
 const noto = Noto_Sans({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
@@ -30,7 +31,9 @@ export default function RootLayout({
         className={cn(noto.className, "flex h-screen justify-center bg-bg/80")}
       >
         <SessionProvider session={session}>
-          <RecoilRoot>{children}</RecoilRoot>
+          <RecoilRoot>
+            <Redirect>{children}</Redirect>
+          </RecoilRoot>
         </SessionProvider>
       </body>
     </html>

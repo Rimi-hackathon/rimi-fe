@@ -6,13 +6,29 @@ import Paragraph from "@/components/Paragraph";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import Container from "@/components/Container";
-import { signIn, signOut, useSession, getCsrfToken } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { main } from "@/lib/recoil";
 
 export default function Home() {
   const router = useRouter();
-
+  const [state, setState] = useRecoilState(main);
   const { data: session } = useSession();
-  console.log(session);
+
+  useEffect(() => {
+    if (!session) return;
+    const {
+      user: { email, name },
+    } = session as any;
+
+    setState((prev) => ({
+      ...prev,
+      email,
+      name,
+    }));
+    router.push("/job");
+  }, [session]);
 
   return (
     <Container>
@@ -25,15 +41,13 @@ export default function Home() {
       </Paragraph>
       <Button
         onClick={() => {
-          router.push("/job");
+          signIn();
         }}
         className="mt-10"
         primary
       >
         시작하기
       </Button>
-      <Button onClick={() => signIn()}>로그인</Button>
-      <Button onClick={() => signOut()}>로그아웃</Button>
     </Container>
   );
 }

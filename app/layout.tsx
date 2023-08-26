@@ -23,7 +23,16 @@ export default function RootLayout({
 
   useEffect(() => {
     if (!session) router.push("/");
-    disableBodyScroll(bodyRef.current);
+    disableBodyScroll(bodyRef.current, {
+      //@ts-ignore
+      allowTouchMove: (el) => {
+        while (el && el !== document.body) {
+          if (el.getAttribute("body-scroll-lock-ignore") !== null) return true;
+          //@ts-ignore
+          el = el.parentElement;
+        }
+      },
+    });
   }, [session]);
   return (
     <html lang="ko">

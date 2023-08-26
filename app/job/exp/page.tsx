@@ -8,7 +8,7 @@ import Advice from "@/components/Advice";
 
 const Exp = () => {
   return (
-    <Container>
+    <Container center>
       <Advice
         comment="
         개인 브랜딩의 여정에서 가장 중요한 단계는 바로 '자신을 알아가는

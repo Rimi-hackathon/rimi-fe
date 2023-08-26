@@ -8,12 +8,15 @@ interface ProgressProps {
 const Progress = ({ text, step }: ProgressProps) => {
   return (
     <div className="relative flex w-full items-center justify-between">
-      {[0, 1, 2, 3, 4].map((item) => {
+      {[0, 1, 2, 3, 4].map((item, index) => {
         const cur = Number(step);
         if (item === cur) {
           if (item === 4) {
             return (
-              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary p-2">
+              <div
+                className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary p-2"
+                key={index}
+              >
                 <div className="h-full w-full rounded-full bg-primary" />
                 <div className="absolute -bottom-10 flex flex-col items-center">
                   <FaCaretUp className="-mb-0.5 text-sm text-primary" />
@@ -25,7 +28,7 @@ const Progress = ({ text, step }: ProgressProps) => {
             );
           }
           return (
-            <>
+            <div className="flex w-full items-center" key={index}>
               <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary p-2">
                 <div className="h-full w-full rounded-full bg-primary" />
                 <div className="absolute -bottom-10 flex flex-col items-center">
@@ -36,31 +39,32 @@ const Progress = ({ text, step }: ProgressProps) => {
                 </div>
               </div>
               <div className="w-full border-t-2 border-white opacity-70" />
-            </>
+            </div>
           );
         }
         if (item < cur) {
           return (
-            <>
+            <div className="flex w-full items-center" key={index}>
               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-primary text-lg text-white">
                 <FaCheck />
               </div>
               <div className="w-full border-t-2 border-primary" />
-            </>
+            </div>
           );
         }
         if (item === 4) {
           return (
-            <>
-              <div className="h-8 w-8 shrink-0 rounded-full border-2 border-white opacity-70" />
-            </>
+            <div
+              className="h-8 w-8 shrink-0 rounded-full border-2 border-white opacity-70"
+              key={index}
+            />
           );
         } else {
           return (
-            <>
+            <div className="flex w-full items-center" key={index}>
               <div className="h-8 w-8 shrink-0 rounded-full border-2 border-white opacity-70" />
               <div className="w-full border-t-2 border-white opacity-70" />
-            </>
+            </div>
           );
         }
       })}

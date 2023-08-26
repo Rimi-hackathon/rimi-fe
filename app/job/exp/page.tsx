@@ -15,7 +15,7 @@ const Exp = () => {
         것'이에요. 철학적이거나 비유적인 의미가 아니라, 진짜로 '자신을 알아가는
         것' 말이에요."
       />
-      <Image src={DesignImg} alt="디자인" width={300} />
+      <Image src={DesignImg} alt="디자인" width={250} />
       <Title center>당신은 디자인과 관련된 경험이 있으신가요?</Title>
       <Paragraph center className="mb-5">
         과제나 취미, 혹은 해당 분야에 관련 하여 깊게 고찰해 보았던 경험도

@@ -275,9 +275,18 @@ const Detail = ({
               className="h-48 w-full select-none resize-none rounded-lg p-5 outline-none ring-primary focus:ring-4"
               placeholder="내용을 입력해주세요."
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => setText(e.target.value.slice(0, 300))}
             />
-            <p className="text-sm text-white/80">최소 30자| 최대 300자</p>
+            <p className="text-sm text-white/80">
+              <span
+                className={
+                  text.length >= 30 ? "font-bold text-emerald-500" : ""
+                }
+              >
+                최소 30자
+              </span>{" "}
+              | 최대 300자
+            </p>
           </div>
           {advice && (
             <>

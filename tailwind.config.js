@@ -8,9 +8,6 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    colors: {
-      bg: "#2B2C31",
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -20,13 +17,14 @@ module.exports = {
     },
     extend: {
       colors: {
+        bg: "#2B2C31",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#007bff",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

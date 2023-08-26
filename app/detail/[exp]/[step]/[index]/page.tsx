@@ -277,16 +277,18 @@ const Detail = ({
               value={text}
               onChange={(e) => setText(e.target.value.slice(0, 300))}
             />
-            <p className="text-sm text-white/80">
-              <span
-                className={
-                  text.length >= 30 ? "font-bold text-emerald-500" : ""
-                }
-              >
-                최소 30자
-              </span>{" "}
-              | 최대 300자
-            </p>
+            {content.icon !== "🎖️" && (
+              <p className="text-sm text-white/80">
+                <span
+                  className={
+                    text.length >= 30 ? "font-bold text-emerald-500" : ""
+                  }
+                >
+                  최소 30자
+                </span>{" "}
+                | 최대 300자
+              </p>
+            )}
           </div>
           {advice && (
             <>
@@ -298,6 +300,30 @@ const Detail = ({
                 <p className="tracking-wide text-white/80">{advice}</p>
               </div>
             </>
+          )}
+          {content.icon === "🎖️" && (
+            <Button
+              color="gray"
+              onClick={() => {
+                axios
+                  .post("https://f3e2-183-96-52-165.ngrok-free.app/api/next", {
+                    question: content.title,
+                    answer: "none",
+                    advice: advice.slice(0, 300),
+                    email: state.email,
+                    step: Number(params.step),
+                    percent: Number(params.index),
+                  })
+                  .then(() =>
+                    router.push(
+                      //@ts-ignore
+                      content.next,
+                    ),
+                  );
+              }}
+            >
+              아직은 없어요!
+            </Button>
           )}
           <Button
             disabled={text.length < 30}

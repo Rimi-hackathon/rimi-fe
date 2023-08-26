@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={cn(noto.className, "flex h-screen justify-center bg-bg/80")}
       >
-        <div className="flex h-full w-full max-w-md items-center bg-bg p-10">
+        <div className="flex h-full min-h-screen w-full max-w-md items-start justify-start overflow-y-auto bg-bg p-10">
           {children}
         </div>
       </body>

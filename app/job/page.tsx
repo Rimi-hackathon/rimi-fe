@@ -24,18 +24,18 @@ const Job = () => {
       </Paragraph>
       <div className="flex w-full gap-5">
         <Card title="디자인">
-          <Image src={DesignImg} alt="디자인" width={90} />
+          <Image src={DesignImg} alt="디자인" width={110} />
         </Card>
         <Card title="개발">
-          <Image src={DevImg} alt="개발" width={90} />
+          <Image src={DevImg} alt="개발" width={110} />
         </Card>
       </div>
       <div className="flex w-full gap-5">
         <Card title="기획">
-          <Image src={ProjectImg} alt="기획" width={90} />
+          <Image src={ProjectImg} alt="기획" width={110} />
         </Card>
         <Card title="목록에 없어요">
-          <Image src={NoneImg} alt="목록에 없어요" width={90} />
+          <Image src={NoneImg} alt="목록에 없어요" width={110} />
         </Card>
       </div>
 

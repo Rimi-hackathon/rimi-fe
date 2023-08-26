@@ -1,7 +1,7 @@
 "use client";
 import Container from "@/components/Container";
 import Image from "next/image";
-import Paper from "@/public/paper.png";
+import Document from "@/public/document.png";
 import { useRecoilState } from "recoil";
 import { main } from "@/lib/recoil";
 import Title from "@/components/Title";
@@ -17,7 +17,7 @@ const Result = () => {
   );
   return (
     <Container center>
-      <Image src={Paper} alt="document" width={250} />
+      <Image src={Document} alt="document" width={250} />
       <Title center>
         {state.name}님의 퍼스널 브랜딩 페이지가 완성되었어요!
       </Title>

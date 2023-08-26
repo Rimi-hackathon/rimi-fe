@@ -10,6 +10,8 @@ import Paragraph from "@/components/Paragraph";
 import Button from "@/components/Button";
 import Advice from "@/components/Advice";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { main } from "@/lib/recoil";
 
 interface ExpProps {
   params: { field: string };
@@ -17,6 +19,7 @@ interface ExpProps {
 
 const Exp = ({ params }: ExpProps) => {
   const router = useRouter();
+  const [, setState] = useRecoilState(main);
   const jobText: { [key: string]: string } = {
     dev: "개발",
     design: "디자인",
@@ -33,7 +36,7 @@ const Exp = ({ params }: ExpProps) => {
         comment="
         개인 브랜딩의 여정에서 가장 중요한 단계는 바로 '자신을 알아가는
         것'이에요. 철학적이거나 비유적인 의미가 아니라, 진짜로 '자신을 알아가는
-        것' 말이에요."
+        것' 말이에요.\n \n 1. 자신을 진정성 있게 만드는 요소 파악하기\n2. 자신의 강점과 역량 파악하기\n3. 다른 사람과 차별화되는 요소 파악하기\n \n그래야만 채용 담당자, 고객, 투자자 또는 비즈니스 파트너가 여러분을 진지하게 받아들일 수 있습니다."
       />
       <Image src={Img[params.field]} alt={jobText[params.field]} width={250} />
       <Title center>
@@ -46,6 +49,10 @@ const Exp = ({ params }: ExpProps) => {
       <Button
         color="green"
         onClick={() => {
+          setState((prev) => ({
+            ...prev,
+            exp: "nonexp",
+          }));
           router.push(`/detail/nonexp/0/0`);
         }}
       >
@@ -53,6 +60,10 @@ const Exp = ({ params }: ExpProps) => {
       </Button>
       <Button
         onClick={() => {
+          setState((prev) => ({
+            ...prev,
+            exp: "exp",
+          }));
           router.push(`/detail/exp/0/0`);
         }}
       >

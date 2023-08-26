@@ -5,15 +5,19 @@ interface CardProps {
   title: string;
   onClick?: () => void;
   selected?: boolean;
+  disabled?: boolean;
 }
 
-const Card = ({ children, title, onClick, selected }: CardProps) => {
+const Card = ({ children, title, onClick, selected, disabled }: CardProps) => {
   return (
     <button
-      onClick={onClick}
+      onClick={() => {
+        !disabled && onClick && onClick();
+      }}
       className={cn(
         "flex aspect-square w-full flex-col items-center justify-between rounded-lg border-2 border-[#405671] bg-[#405671] p-3 text-white",
         selected && "border-2 border-primary",
+        disabled && "cursor-not-allowed bg-gray-500 opacity-30",
       )}
     >
       {children}

@@ -13,10 +13,13 @@ import ProjectImg from "@/public/project.png";
 import NoneImg from "@/public/none.png";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { main } from "@/lib/recoil";
 
 const Job = () => {
   const router = useRouter();
   const [job, setJob] = useState("");
+  const [, setState] = useRecoilState(main);
   return (
     <Container center>
       <Image src={Logo} alt="3D Logo" width={60} />
@@ -60,6 +63,7 @@ const Job = () => {
             setJob("none");
           }}
           selected={job === "none"}
+          disabled
         >
           <Image src={NoneImg} alt="목록에 없어요" width={110} />
         </Card>
@@ -71,6 +75,17 @@ const Job = () => {
       <Button
         primary
         onClick={() => {
+          setState((prev) => ({
+            ...prev,
+            field:
+              job === "dev"
+                ? "개발"
+                : job === "design"
+                ? "디자인"
+                : job === "project"
+                ? "기획"
+                : "없음",
+          }));
           router.push(`/job/${job}`);
         }}
         disabled={!job}

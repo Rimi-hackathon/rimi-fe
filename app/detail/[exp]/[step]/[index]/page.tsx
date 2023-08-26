@@ -201,14 +201,13 @@ const Detail = ({
     const answer = "안되는 것들을 해내는 게 재밌다";
     axios
       .post(
-        "https://52.79.190.223/api/advice",
+        "https://f3e2-183-96-52-165.ngrok-free.app/api/advice",
         {
           question,
           answer,
         },
         {
           withCredentials: true,
-          headers: { "Content-Type": "application/json" },
         },
       )
       .then((res) => {

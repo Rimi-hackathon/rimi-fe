@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 
 interface ParagraphProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   center?: boolean;
+  text?: string[];
 }
 
-const Paragraph = ({ children, className, center }: ParagraphProps) => {
+const Paragraph = ({ children, className, center, text }: ParagraphProps) => {
   return (
     <p
       className={cn(
@@ -15,6 +16,11 @@ const Paragraph = ({ children, className, center }: ParagraphProps) => {
         center && "text-center",
       )}
     >
+      {text?.map((item, index) => (
+        <span className="block" key={index}>
+          {item}
+        </span>
+      ))}
       {children}
     </p>
   );

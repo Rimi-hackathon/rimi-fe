@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
 
 interface TitleProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   center?: boolean;
+  text?: string[];
 }
 
-const Title = ({ children, center }: TitleProps) => {
+const Title = ({ children, center, text }: TitleProps) => {
   return (
     <h2
       className={cn(
@@ -13,6 +14,7 @@ const Title = ({ children, center }: TitleProps) => {
         "break-keep text-2xl font-semibold tracking-wide text-white",
       )}
     >
+      {text?.map((item, index) => <p key={index}>{item}</p>)}
       {children}
     </h2>
   );

@@ -45,7 +45,6 @@ export default function Home() {
         }}
         className="mt-10"
         primary
-        pulse
       >
         시작하기
       </Button>

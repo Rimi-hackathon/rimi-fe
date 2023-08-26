@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "@/components/Container";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
@@ -9,8 +11,10 @@ import DesignImg from "@/public/design.png";
 import DevImg from "@/public/dev.png";
 import ProjectImg from "@/public/project.png";
 import NoneImg from "@/public/none.png";
+import { useRouter } from "next/navigation";
 
 const Job = () => {
+  const router = useRouter();
   return (
     <Container center>
       <Image src={Logo} alt="3D Logo" width={50} priority />
@@ -33,7 +37,14 @@ const Job = () => {
         </Card>
       </div>
       <Paragraph className="underline">아직 방향을 정하지 못했어요</Paragraph>
-      <Button primary>선택하기</Button>
+      <Button
+        primary
+        onClick={() => {
+          router.push("/job/exp");
+        }}
+      >
+        선택하기
+      </Button>
     </Container>
   );
 };

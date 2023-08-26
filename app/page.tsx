@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-8">
+    <main className="flex flex-col gap-5">
       <Image src={Logo} alt="3D Logo" width={200} />
       <Title>Remi로 AI와 함께 5분만에 퍼스널 브랜딩을 시작해보세요.</Title>
       <Paragraph>

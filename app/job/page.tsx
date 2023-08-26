@@ -18,8 +18,8 @@ const Job = () => {
   return (
     <Container center>
       <Image src={Logo} alt="3D Logo" width={50} priority />
-      <Title>훗 날 어떤 일을 하고 싶으신가요?</Title>
-      <Paragraph>
+      <Title center>훗 날 어떤 일을 하고 싶으신가요?</Title>
+      <Paragraph center>
         아직 명확하게 방향을 정하지 않았거나, 경험이 없어도 괜찮아요.
       </Paragraph>
       <div className="my-5 grid aspect-square w-full grid-cols-2 grid-rows-2 gap-5">
@@ -36,7 +36,9 @@ const Job = () => {
           <Image src={NoneImg} alt="목록에 없어요" width={110} priority />
         </Card>
       </div>
-      <Paragraph className="underline">아직 방향을 정하지 못했어요</Paragraph>
+      <Paragraph className="underline" center>
+        아직 방향을 정하지 못했어요
+      </Paragraph>
       <Button
         primary
         onClick={() => {

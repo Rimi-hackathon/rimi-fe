@@ -3,9 +3,10 @@ import { cn } from "@/lib/utils";
 interface ContainerProps {
   children: React.ReactNode;
   center?: boolean;
+  lg?: boolean;
 }
 
-const Container = ({ children, center }: ContainerProps) => {
+const Container = ({ children, center, lg }: ContainerProps) => {
   return (
     <main
       className={cn(

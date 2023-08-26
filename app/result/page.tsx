@@ -36,7 +36,14 @@ const Result = () => {
           <p className="tracking-wide text-white/80">{advice}</p>
         </div>
       </div>
-      <Button>생성된 노션 페이지로 이동하기</Button>
+      <Button
+        onClick={() => {
+          console.log(state.notion);
+          window.open(state.notion, "_blank");
+        }}
+      >
+        생성된 노션 페이지로 이동하기
+      </Button>
       <Button color="green">노션 링크 복사하기</Button>
     </Container>
   );

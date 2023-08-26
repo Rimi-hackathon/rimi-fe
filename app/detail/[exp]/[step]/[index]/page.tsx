@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { main } from "@/lib/recoil";
 import axios from "axios";
+import Loading from "@/components/Loading";
 
 const Detail = ({
   params,
@@ -194,6 +195,7 @@ const Detail = ({
   const router = useRouter();
   const [text, setText] = useState("");
   const [advice, setAdvice] = useState("");
+  const [loading, setLoading] = useState(false);
   const content =
     contents[params.exp][Number(params.step)][Number(params.index)];
   const getContent = async () => {
@@ -238,186 +240,204 @@ const Detail = ({
 
   return (
     <Container>
-      <Progress
-        text={`${stepLabel[Number(params.step)]} ${Math.min(
-          (Number(params.index) + 1) *
-            Math.ceil(
-              100 / (contents[params.exp][params.step] as Array<Object>).length,
-            ),
-          100,
-        )}%`}
-        step={params.step}
-      />
-      <div className="mb-5 mt-16 flex flex-col gap-3">
-        <p className="mb-3 text-9xl">
-          {
-            // @ts-ignore
-            content.icon
-          }
-        </p>
-        <Title>
-          {
-            // @ts-ignore
-            content.title
-          }
-        </Title>
-        <Paragraph
-          text={
-            //@ts-ignore
-            content.sub
-          }
-        />
-      </div>
-      {params.step !== "4" && (
+      {loading ? (
+        <Loading />
+      ) : (
         <>
-          <div className="mb-5 w-full">
-            <textarea
-              className="h-48 w-full select-none resize-none rounded-lg p-5 outline-none ring-primary focus:ring-4"
-              placeholder="내용을 입력해주세요."
-              value={text}
-              onChange={(e) => setText(e.target.value.slice(0, 300))}
+          <Progress
+            text={`${stepLabel[Number(params.step)]} ${Math.min(
+              (Number(params.index) + 1) *
+                Math.ceil(
+                  100 /
+                    (contents[params.exp][params.step] as Array<Object>).length,
+                ),
+              100,
+            )}%`}
+            step={params.step}
+          />
+          <div className="mb-5 mt-16 flex flex-col gap-3">
+            <p className="mb-3 text-9xl">
+              {
+                // @ts-ignore
+                content.icon
+              }
+            </p>
+            <Title>
+              {
+                // @ts-ignore
+                content.title
+              }
+            </Title>
+            <Paragraph
+              text={
+                //@ts-ignore
+                content.sub
+              }
             />
-            {content.icon !== "🎖️" && (
-              <p className="text-sm text-white/80">
-                <span
-                  className={
-                    text.length >= 30 ? "font-bold text-emerald-500" : ""
-                  }
-                >
-                  최소 30자
-                </span>{" "}
-                | 최대 300자
-              </p>
-            )}
           </div>
-          {advice && (
+          {params.step !== "4" && (
             <>
-              <div className="flex items-center gap-3">
-                <Image src={Logo} alt="logo" width={30} />
-                <Title>Rimi의 조언</Title>
+              <div className="mb-5 w-full">
+                <textarea
+                  className="h-48 w-full select-none resize-none rounded-lg p-5 outline-none ring-primary focus:ring-4"
+                  placeholder="내용을 입력해주세요."
+                  value={text}
+                  onChange={(e) => setText(e.target.value.slice(0, 300))}
+                />
+                {content.icon !== "🎖️" && (
+                  <p className="text-sm text-white/80">
+                    <span
+                      className={
+                        text.length >= 30 ? "font-bold text-emerald-500" : ""
+                      }
+                    >
+                      최소 30자
+                    </span>{" "}
+                    | 최대 300자
+                  </p>
+                )}
               </div>
-              <div className="relative mb-5 rounded-xl border-4 border-primary bg-gray-dark p-5">
-                <p className="tracking-wide text-white/80">{advice}</p>
-              </div>
+              {advice && (
+                <>
+                  <div className="flex items-center gap-3">
+                    <Image src={Logo} alt="logo" width={30} />
+                    <Title>Rimi의 조언</Title>
+                  </div>
+                  <div className="relative mb-5 rounded-xl border-4 border-primary bg-gray-dark p-5">
+                    <p className="tracking-wide text-white/80">{advice}</p>
+                  </div>
+                </>
+              )}
+              {content.icon === "🎖️" && (
+                <Button
+                  color="gray"
+                  onClick={() => {
+                    axios
+                      .post(
+                        "https://f3e2-183-96-52-165.ngrok-free.app/api/next",
+                        {
+                          question: content.title,
+                          answer: "none",
+                          advice: advice.slice(0, 300),
+                          email: state.email,
+                          step: Number(params.step),
+                          percent: Number(params.index),
+                        },
+                      )
+                      .then(() =>
+                        router.push(
+                          //@ts-ignore
+                          content.next,
+                        ),
+                      );
+                  }}
+                >
+                  아직은 없어요!
+                </Button>
+              )}
+              <Button
+                disabled={text.length < 30}
+                color="green"
+                onClick={() => getContent()}
+              >
+                Rimi에게 조언받기
+              </Button>
+
+              <Button
+                onClick={() => {
+                  axios
+                    .post(
+                      "https://f3e2-183-96-52-165.ngrok-free.app/api/next",
+                      {
+                        question: content.title,
+                        answer: text,
+                        advice: advice.slice(0, 300),
+                        email: state.email,
+                        step: Number(params.step),
+                        percent: Number(params.index),
+                      },
+                    )
+                    .then(() =>
+                      router.push(
+                        //@ts-ignore
+                        content.next,
+                      ),
+                    );
+                }}
+                disabled={text.length < 30}
+              >
+                다음 질문
+              </Button>
             </>
           )}
-          {content.icon === "🎖️" && (
-            <Button
-              color="gray"
-              onClick={() => {
-                axios
-                  .post("https://f3e2-183-96-52-165.ngrok-free.app/api/next", {
-                    question: content.title,
-                    answer: "none",
-                    advice: advice.slice(0, 300),
-                    email: state.email,
-                    step: Number(params.step),
-                    percent: Number(params.index),
-                  })
-                  .then(() =>
-                    router.push(
-                      //@ts-ignore
-                      content.next,
-                    ),
-                  );
-              }}
-            >
-              아직은 없어요!
-            </Button>
+          {params.step === "4" && (
+            <>
+              <div className="flex flex-col gap-3 text-white">
+                <label className="text-xl">
+                  <span className="text-red-500">*</span> 이름
+                </label>
+                <input
+                  type="text"
+                  className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
+                  placeholder="홍길동"
+                  value={state.name}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, name: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="flex flex-col gap-3 text-white">
+                <label className="text-xl">SNS 주소</label>
+                <input
+                  type="text"
+                  className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
+                  placeholder="instagram.com/rimi"
+                  value={state.sns}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, sns: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="mb-5 flex flex-col gap-3 text-white">
+                <label className="text-xl">개인 사이트 주소</label>
+                <input
+                  type="text"
+                  className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
+                  placeholder="google.com"
+                  value={state.site}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, site: e.target.value }))
+                  }
+                />
+              </div>
+              <Button
+                onClick={() => {
+                  if (state.name) {
+                    setLoading(true);
+                    axios
+                      .post(
+                        "https://f3e2-183-96-52-165.ngrok-free.app/api/createNotionPage",
+                        {
+                          name: state.name,
+                          snsUrl: state.sns,
+                          personalSiteUrl: state.site,
+                          email: state.email,
+                        },
+                      )
+                      .then((res) => {
+                        setState((prev) => ({
+                          ...prev,
+                          notion: res.data.notionUrl,
+                        }));
+                        router.push("/result");
+                      });
+                  } else alert("이름을 입력해주세요.");
+                }}
+              >
+                다 했어요!
+              </Button>
+            </>
           )}
-          <Button
-            disabled={text.length < 30}
-            color="green"
-            onClick={() => getContent()}
-          >
-            Rimi에게 조언받기
-          </Button>
-
-          <Button
-            onClick={() => {
-              axios
-                .post("https://f3e2-183-96-52-165.ngrok-free.app/api/next", {
-                  question: content.title,
-                  answer: text,
-                  advice: advice.slice(0, 300),
-                  email: state.email,
-                  step: Number(params.step),
-                  percent: Number(params.index),
-                })
-                .then(() =>
-                  router.push(
-                    //@ts-ignore
-                    content.next,
-                  ),
-                );
-            }}
-            disabled={text.length < 30}
-          >
-            다음 질문
-          </Button>
-        </>
-      )}
-      {params.step === "4" && (
-        <>
-          <div className="flex flex-col gap-3 text-white">
-            <label className="text-xl">
-              <span className="text-red-500">*</span> 이름
-            </label>
-            <input
-              type="text"
-              className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
-              placeholder="홍길동"
-              value={state.name}
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, name: e.target.value }))
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-3 text-white">
-            <label className="text-xl">SNS 주소</label>
-            <input
-              type="text"
-              className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
-              placeholder="instagram.com/rimi"
-              value={state.sns}
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, sns: e.target.value }))
-              }
-            />
-          </div>
-          <div className="mb-5 flex flex-col gap-3 text-white">
-            <label className="text-xl">개인 사이트 주소</label>
-            <input
-              type="text"
-              className="rounded-lg p-3 py-4 text-black outline-none ring-primary focus:ring-4"
-              placeholder="google.com"
-              value={state.site}
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, site: e.target.value }))
-              }
-            />
-          </div>
-          <Button
-            onClick={() => {
-              if (state.name) {
-                axios
-                  .post(
-                    "https://f3e2-183-96-52-165.ngrok-free.app/api/createNotionPage",
-                    {
-                      name: state.name,
-                      snsUrl: state.sns,
-                      personalSiteUrl: state.site,
-                      email: state.email,
-                    },
-                  )
-                  .then(() => {
-                    router.push("/result");
-                  });
-              } else alert("이름을 입력해주세요.");
-            }}
-          >
-            다 했어요!
-          </Button>
         </>
       )}
     </Container>

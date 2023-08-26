@@ -8,6 +8,7 @@ export const main = atom({
     field: '',
     exp: '',
     sns: '',
-    site: ''
+    site: '',
+    notion: ''
   }
 });

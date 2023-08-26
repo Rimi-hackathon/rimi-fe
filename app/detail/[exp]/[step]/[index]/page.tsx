@@ -8,10 +8,9 @@ import Title from "@/components/Title";
 import Logo from "@/public/logo.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { main } from "@/lib/recoil";
-import axios from "axios";
 
 const Detail = ({
   params,
@@ -196,30 +195,44 @@ const Detail = ({
   const [advice, setAdvice] = useState("");
   const content =
     contents[params.exp][Number(params.step)][Number(params.index)];
-  const getContent = () => {
+  const getContent = async () => {
     const question = content.title;
-    const answer = "안되는 것들을 해내는 게 재밌다";
-    axios
-      .post(
-        "https://f3e2-183-96-52-165.ngrok-free.app/api/advice",
-        {
+    const response = await fetch(
+      "https://f3e2-183-96-52-165.ngrok-free.app/api/advice",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           question,
-          answer,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        },
-      )
-      .then((res) => {
-        console.log(res);
-      });
+          answer: text,
+        }),
+      },
+    );
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder("utf-8");
+    while (true) {
+      //@ts-ignore
+      const { done, value } = await reader?.read();
+      if (done) {
+        break;
+      }
+      const decodedChunk = decoder.decode(value);
+      const lines = decodedChunk.split("\n");
+      const parsedLines = lines
+        .map((line) => line.replace(/^data:/, "").trim())
+        .filter((line) => line !== "" && line !== "[DONE]")
+        .map((line) => JSON.parse(line));
+      for (const parseLine of parsedLines) {
+        const { choices } = parseLine;
+        const {
+          delta: { content },
+        } = choices[0];
+        if (content) setAdvice((prev) => prev + content);
+      }
+    }
   };
-
-  getContent();
 
   return (
     <Container>
@@ -278,11 +291,7 @@ const Detail = ({
           <Button
             disabled={text.length < 30}
             color="green"
-            onClick={() =>
-              setAdvice(
-                "개인 브랜딩의 여정에서 가장 중요한 단계는 바로 '자신을 알아가는 것'이에요. 철학적이거나 비유적인 의미가 아니라, 진짜로 '자신을 알아가는 것' 말이에요.",
-              )
-            }
+            onClick={() => getContent()}
           >
             Rimi에게 조언받기
           </Button>

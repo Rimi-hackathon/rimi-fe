@@ -1,12 +1,28 @@
 import Container from "@/components/Container";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import DesignImg from "@/public/design.png";
+import DevImg from "@/public/dev.png";
+import ProjectImg from "@/public/project.png";
 import Title from "@/components/Title";
 import Paragraph from "@/components/Paragraph";
 import Button from "@/components/Button";
 import Advice from "@/components/Advice";
 
-const Exp = () => {
+interface ExpProps {
+  params: { detail: string };
+}
+
+const Exp = ({ params }: ExpProps) => {
+  const jobText: { [key: string]: string } = {
+    dev: "개발",
+    design: "디자인",
+    project: "기획",
+  };
+  const Img: { [key: string]: StaticImageData } = {
+    dev: DevImg,
+    design: DesignImg,
+    project: ProjectImg,
+  };
   return (
     <Container center>
       <Advice
@@ -15,8 +31,14 @@ const Exp = () => {
         것'이에요. 철학적이거나 비유적인 의미가 아니라, 진짜로 '자신을 알아가는
         것' 말이에요."
       />
-      <Image src={DesignImg} alt="디자인" width={250} />
-      <Title center>당신은 디자인과 관련된 경험이 있으신가요?</Title>
+      <Image
+        src={Img[params.detail]}
+        alt={jobText[params.detail]}
+        width={250}
+      />
+      <Title center>
+        당신은 {jobText[params.detail]}과 관련된 경험이 있으신가요?
+      </Title>
       <Paragraph center className="mb-5">
         과제나 취미, 혹은 해당 분야에 관련 하여 깊게 고찰해 보았던 경험도
         좋아요!

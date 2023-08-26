@@ -12,9 +12,11 @@ import DevImg from "@/public/dev.png";
 import ProjectImg from "@/public/project.png";
 import NoneImg from "@/public/none.png";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Job = () => {
   const router = useRouter();
+  const [job, setJob] = useState("");
   return (
     <Container center>
       <Image src={Logo} alt="3D Logo" width={60} />
@@ -23,18 +25,42 @@ const Job = () => {
         아직 명확하게 방향을 정하지 않았거나, 경험이 없어도 괜찮아요.
       </Paragraph>
       <div className="flex w-full gap-5">
-        <Card title="디자인">
+        <Card
+          onClick={() => {
+            setJob("design");
+          }}
+          title="디자인"
+          selected={job === "design"}
+        >
           <Image src={DesignImg} alt="디자인" width={110} />
         </Card>
-        <Card title="개발">
+        <Card
+          onClick={() => {
+            setJob("dev");
+          }}
+          title="개발"
+          selected={job === "dev"}
+        >
           <Image src={DevImg} alt="개발" width={110} />
         </Card>
       </div>
       <div className="flex w-full gap-5">
-        <Card title="기획">
+        <Card
+          onClick={() => {
+            setJob("project");
+          }}
+          title="기획"
+          selected={job === "project"}
+        >
           <Image src={ProjectImg} alt="기획" width={110} />
         </Card>
-        <Card title="목록에 없어요">
+        <Card
+          title="목록에 없어요"
+          onClick={() => {
+            setJob("none");
+          }}
+          selected={job === "none"}
+        >
           <Image src={NoneImg} alt="목록에 없어요" width={110} />
         </Card>
       </div>
@@ -45,8 +71,9 @@ const Job = () => {
       <Button
         primary
         onClick={() => {
-          router.push("/job/exp");
+          router.push(`/job/${job}`);
         }}
+        disabled={!job}
       >
         선택하기
       </Button>

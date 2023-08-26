@@ -6,6 +6,7 @@ interface ButtonProps {
   color?: "green" | "gray";
   className?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -13,6 +14,7 @@ const Button = ({
   primary,
   className,
   color,
+  disabled,
   ...props
 }: ButtonProps) => {
   return (
@@ -23,6 +25,7 @@ const Button = ({
         primary && "bg-primary",
         color === "green" && "bg-green",
         color === "gray" && "bg-gray",
+        disabled && "cursor-not-allowed bg-gray-500 opacity-50",
       )}
       {...props}
     >

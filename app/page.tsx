@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "@/public/3d_Logo.png";
+import Logo from "@/public/3d_logo.png";
 import Title from "@/components/Title";
 import Paragraph from "@/components/Paragraph";
 import Button from "@/components/Button";

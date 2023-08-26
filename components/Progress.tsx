@@ -8,10 +8,10 @@ interface ProgressProps {
 const Progress = ({ text, step }: ProgressProps) => {
   return (
     <div className="relative flex w-full items-center justify-between">
-      {[1, 2, 3, 4, 5].map((item) => {
+      {[0, 1, 2, 3, 4].map((item) => {
         const cur = Number(step);
         if (item === cur) {
-          if (item === 5) {
+          if (item === 4) {
             return (
               <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary p-2">
                 <div className="h-full w-full rounded-full bg-primary" />
@@ -49,7 +49,7 @@ const Progress = ({ text, step }: ProgressProps) => {
             </>
           );
         }
-        if (item === 5) {
+        if (item === 4) {
           return (
             <>
               <div className="h-8 w-8 shrink-0 rounded-full border-2 border-white opacity-70" />

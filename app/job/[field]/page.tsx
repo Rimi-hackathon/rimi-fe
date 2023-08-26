@@ -46,14 +46,14 @@ const Exp = ({ params }: ExpProps) => {
       <Button
         color="green"
         onClick={() => {
-          router.push(`/detail/nonexp/1/1`);
+          router.push(`/detail/nonexp/0/0`);
         }}
       >
         아직 경험이 없어요
       </Button>
       <Button
         onClick={() => {
-          router.push(`/detail/exp/1/1`);
+          router.push(`/detail/exp/0/0`);
         }}
       >
         경험이 있어요

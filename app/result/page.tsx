@@ -27,7 +27,7 @@ const Result = () => {
         -{">"} 웹에 게시 를 통해 웹페이지로 게시할 수 있어요!
       </Paragraph>
 
-      <div className="flex flex-col gap-5">
+      {/* <div className="flex flex-col gap-5">
         <div className="flex items-center gap-3">
           <Image src={Logo} alt="logo" width={30} />
           <Title>Rimi의 조언</Title>
@@ -35,16 +35,15 @@ const Result = () => {
         <div className="relative mb-5 rounded-xl border-4 border-primary bg-gray-dark p-5">
           <p className="tracking-wide text-white/80">{advice}</p>
         </div>
-      </div>
+      </div> */}
       <Button
         onClick={() => {
-          console.log(state.notion);
           window.open(state.notion, "_blank");
         }}
       >
         생성된 노션 페이지로 이동하기
       </Button>
-      <Button color="green">노션 링크 복사하기</Button>
+      {/* <Button color="green">노션 링크 복사하기</Button> */}
     </Container>
   );
 };

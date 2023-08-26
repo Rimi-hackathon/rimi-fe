@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import { RecoilRoot } from "recoil";
 import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { disableBodyScroll } from "body-scroll-lock";
 
 const noto = Noto_Sans({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
@@ -18,8 +19,11 @@ export default function RootLayout({
   session: any;
 }) {
   const router = useRouter();
+  const bodyRef: any = useRef();
+
   useEffect(() => {
     if (!session) router.push("/");
+    disableBodyScroll(bodyRef.current);
   }, [session]);
   return (
     <html lang="ko">
@@ -33,6 +37,7 @@ export default function RootLayout({
         <title>Rimi</title>
       </head>
       <body
+        ref={bodyRef}
         className={cn(noto.className, "flex h-screen justify-center bg-bg/80")}
       >
         <SessionProvider session={session}>

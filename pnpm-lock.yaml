@@ -23,6 +23,9 @@ dependencies:
   axios:
     specifier: ^1.4.0
     version: 1.4.0
+  body-scroll-lock:
+    specifier: 4.0.0-beta.0
+    version: 4.0.0-beta.0
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -70,6 +73,9 @@ dependencies:
     version: 5.2.2
 
 devDependencies:
+  '@types/body-scroll-lock':
+    specifier: ^3.1.0
+    version: 3.1.0
   prettier:
     specifier: ^3.0.2
     version: 3.0.2
@@ -266,6 +272,10 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@types/body-scroll-lock@3.1.0:
+    resolution: {integrity: sha512-3owAC4iJub5WPqRhxd8INarF2bWeQq1yQHBgYhN0XLBJMpd5ED10RrJ3aKiAwlTyL5wK7RkBD4SZUQz2AAAMdA==}
+    dev: true
+
   /@types/node@20.5.6:
     resolution: {integrity: sha512-Gi5wRGPbbyOTX+4Y2iULQ27oUPrefaB0PxGQJnfyWN3kvEDGM3mIB5M/gQLmitZf7A9FmLeaqxD3L1CXpm3VKQ==}
     dev: false
@@ -361,6 +371,10 @@ packages:
       buffer: 5.7.1
       inherits: 2.0.4
       readable-stream: 3.6.2
+    dev: false
+
+  /body-scroll-lock@4.0.0-beta.0:
+    resolution: {integrity: sha512-a7tP5+0Mw3YlUJcGAKUqIBkYYGlYxk2fnCasq/FUph1hadxlTRjF+gAcZksxANnaMnALjxEddmSi/H3OR8ugcQ==}
     dev: false
 
   /brace-expansion@1.1.11:

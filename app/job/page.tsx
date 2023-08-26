@@ -22,13 +22,15 @@ const Job = () => {
       <Paragraph center>
         아직 명확하게 방향을 정하지 않았거나, 경험이 없어도 괜찮아요.
       </Paragraph>
-      <div className="my-5 grid aspect-square w-full grid-cols-2 grid-rows-2 gap-5">
+      <div className="flex w-full gap-5">
         <Card title="디자인">
           <Image src={DesignImg} alt="디자인" width={110} priority />
         </Card>
         <Card title="개발">
           <Image src={DevImg} alt="개발" width={110} priority />
         </Card>
+      </div>
+      <div className="flex w-full gap-5">
         <Card title="기획">
           <Image src={ProjectImg} alt="기획" width={110} priority />
         </Card>
@@ -36,6 +38,7 @@ const Job = () => {
           <Image src={NoneImg} alt="목록에 없어요" width={110} priority />
         </Card>
       </div>
+
       <Paragraph className="underline" center>
         아직 방향을 정하지 못했어요
       </Paragraph>

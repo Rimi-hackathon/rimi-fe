@@ -4,13 +4,16 @@ import "./globals.css";
 import { Noto_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { RecoilRoot } from "recoil";
+import { SessionProvider } from "next-auth/react";
 
 const noto = Noto_Sans({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
 export default function RootLayout({
   children,
+  session,
 }: {
   children: React.ReactNode;
+  session: any;
 }) {
   return (
     <html lang="ko">
@@ -26,7 +29,9 @@ export default function RootLayout({
       <body
         className={cn(noto.className, "flex h-screen justify-center bg-bg/80")}
       >
-        <RecoilRoot>{children}</RecoilRoot>
+        <SessionProvider session={session}>
+          <RecoilRoot>{children}</RecoilRoot>
+        </SessionProvider>
       </body>
     </html>
   );

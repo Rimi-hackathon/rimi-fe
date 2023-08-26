@@ -196,6 +196,7 @@ const Detail = ({
   const content =
     contents[params.exp][Number(params.step)][Number(params.index)];
   const getContent = async () => {
+    setAdvice("");
     const question = content.title;
     const response = await fetch(
       "https://f3e2-183-96-52-165.ngrok-free.app/api/advice",

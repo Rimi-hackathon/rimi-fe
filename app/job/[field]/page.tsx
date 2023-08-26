@@ -69,7 +69,9 @@ const Exp = ({ params }: ExpProps) => {
       >
         경험이 있어요
       </Button>
-      <Button color="gray">해당 업종에 종사 중이에요</Button>
+      <Button color="gray" disabled>
+        해당 업종에 종사 중이에요
+      </Button>
     </Container>
   );
 };

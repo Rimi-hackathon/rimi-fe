@@ -6,9 +6,14 @@ import Paragraph from "@/components/Paragraph";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import Container from "@/components/Container";
+import { signIn, signOut, useSession, getCsrfToken } from "next-auth/react";
 
 export default function Home() {
   const router = useRouter();
+
+  const { data: session } = useSession();
+  console.log(session);
+
   return (
     <Container>
       <Image src={Logo} alt="3D Logo" width={200} />
@@ -27,6 +32,8 @@ export default function Home() {
       >
         시작하기
       </Button>
+      <Button onClick={() => signIn()}>로그인</Button>
+      <Button onClick={() => signOut()}>로그아웃</Button>
     </Container>
   );
 }

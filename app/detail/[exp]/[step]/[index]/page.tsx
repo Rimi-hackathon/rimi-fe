@@ -208,6 +208,10 @@ const Detail = ({
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-cache",
+        next: {
+          revalidate: 1,
+        },
         body: JSON.stringify({
           question,
           answer: text,

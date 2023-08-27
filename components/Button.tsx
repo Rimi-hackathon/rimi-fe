@@ -15,6 +15,7 @@ const Button = ({
   className,
   color,
   disabled,
+  onClick,
   ...props
 }: ButtonProps) => {
   return (
@@ -29,6 +30,7 @@ const Button = ({
           disabled &&
             "cursor-not-allowed bg-gray-500 opacity-50 hover:bg-opacity-100",
         )}
+        {...(onClick && !disabled && { onClick })}
         {...props}
       >
         {children}
